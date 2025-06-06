@@ -12,7 +12,6 @@ function spm_create_pages() {
         }
     }
 }
-register_activation_hook(__FILE__, 'spm_create_pages');
 
 function spm_delete_pages() {
     $pages = ['Dashboard', 'Create Event', 'Invitations', 'Profile', 'Preferences'];
@@ -23,4 +22,3 @@ function spm_delete_pages() {
         }
     }
 }
-register_uninstall_hook(__FILE__, 'spm_delete_pages');

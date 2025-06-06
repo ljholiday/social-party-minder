@@ -13,6 +13,12 @@ define('SPM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 require_once SPM_PLUGIN_DIR . 'includes/pages.php';
 require_once SPM_PLUGIN_DIR . 'includes/nav.php';
 
+
+// Properly register activation and uninstall hooks
+register_activation_hook(__FILE__, 'spm_create_pages');
+register_uninstall_hook(__FILE__, 'spm_delete_pages');
+
+
 function spm_register_blocks() {
     if (!function_exists('register_block_type')) return;
 
