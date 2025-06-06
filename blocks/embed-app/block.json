@@ -1,0 +1,9 @@
+{
+  "apiVersion": 2,
+  "name": "partyminder/embed-app",
+  "title": "Party Minder App Block",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Embeds the Party Minder app interface.",
+  "editorScript": "file:./index.js"
+}
