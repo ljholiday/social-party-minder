@@ -16,3 +16,22 @@ button {
     border: none;
     border-radius: 6px;
 }
+.spm-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.spm-nav ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+}
+.spm-nav a {
+    text-decoration: none;
+    color: #4B0082;
+    font-weight: 600;
+}
