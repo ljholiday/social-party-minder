@@ -2,13 +2,14 @@
 /**
  * Plugin Name: Party Minder
  * Description: Core plugin for the Party Minder platform. Creates navigation, frontend UI, and embedded app block.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: Party Minder Team
  */
 defined('ABSPATH') or die('No script kiddies please!');
 define('SPM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 require_once SPM_PLUGIN_DIR . 'includes/pages.php';
 require_once SPM_PLUGIN_DIR . 'includes/nav.php';
+require_once SPM_PLUGIN_DIR . 'includes/events.php';
 register_activation_hook(__FILE__, 'spm_create_pages');
 register_uninstall_hook(__FILE__, 'spm_delete_pages');
 function spm_register_blocks() {
