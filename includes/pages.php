@@ -1,60 +1,51 @@
 <?php
 function spm_create_pages() {
     $pages = [
-        'Dashboard'     => 'template-dashboard.php',
-        'Create Event'  => 'template-create-event.php',
-        'Invitations'   => 'template-invitations.php',
-        'Profile'       => 'template-profile.php',
-        'Preferences'   => 'template-preferences.php',
+        'party-minder'   => ['title' => 'Party Minder'],
+        'dashboard'      => ['title' => 'Dashboard'],
+        'create-event'   => ['title' => 'Create Event'],
+        // Add more pages here as needed
     ];
 
-    foreach ($pages as $title => $template_file) {
-        if (!get_page_by_title($title)) {
-            $post_id = wp_insert_post([
-                'post_title'   => $title,
-                'post_content' => '',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
+    foreach ($pages as $slug => $data) {
+        $title = $data['title'];
+        $template = 'views/template-' . $slug . '.php';
+
+        $page = get_page_by_title($title, OBJECT, 'page');
+
+        if (!$page || $page->post_status === 'trash') {
+            $page_id = wp_insert_post([
+                'post_title'     => $title,
+                'post_name'      => $slug,
+                'post_status'    => 'publish',
+                'post_type'      => 'page',
+                'post_content'   => '',
+                'post_author'    => get_current_user_id(),
             ]);
-            if ($post_id && !is_wp_error($post_id)) {
-                $template_path = plugin_dir_path(__FILE__) . "../views/{$template_file}";
-                if (file_exists($template_path)) {
-                    update_post_meta($post_id, '_wp_page_template', "views/{$template_file}");
-                }
+
+            if (!is_wp_error($page_id)) {
+                update_post_meta($page_id, '_wp_page_template', $template);
             }
+        } else {
+            // Always update the template for existing pages
+            update_post_meta($page->ID, '_wp_page_template', $template);
         }
     }
 }
 
 function spm_delete_pages() {
-    $titles = ['Dashboard', 'Create Event', 'Invitations', 'Profile', 'Preferences'];
-    foreach ($titles as $title) {
-        $post = get_page_by_title($title);
-        if ($post) {
-            wp_delete_post($post->ID, true);
+    $pages = [
+        'party-minder',
+        'dashboard',
+        'create-event',
+        // Add more slugs here as needed
+    ];
+
+    foreach ($pages as $slug) {
+        $page = get_page_by_path($slug);
+        if ($page) {
+            wp_delete_post($page->ID, true);
         }
     }
 }
 
-function spm_add_page_template($templates) {
-    foreach (glob(plugin_dir_path(__FILE__) . '../views/template-*.php') as $file) {
-        $basename = basename($file);
-        $templates["views/{$basename}"] = ucwords(str_replace(['template-', '.php', '-'], ['', '', ' '], $basename));
-    }
-    return $templates;
-}
-add_filter('theme_page_templates', 'spm_add_page_template');
-
-function spm_load_plugin_template($template) {
-    if (is_page()) {
-        $page_template = get_post_meta(get_queried_object_id(), '_wp_page_template', true);
-        if (str_starts_with($page_template, 'views/')) {
-            $template_path = plugin_dir_path(__FILE__) . "../$page_template";
-            if (file_exists($template_path)) {
-                return $template_path;
-            }
-        }
-    }
-    return $template;
-}
-add_filter('template_include', 'spm_load_plugin_template');
