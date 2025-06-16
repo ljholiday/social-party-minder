@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Party Minder
+ * Plugin Name: Social at Party Minder
  * Description: Core plugin for the Party Minder platform. Creates navigation, frontend UI, and embedded app block.
  * Version: 0.1.4
  * Author: Party Minder Team

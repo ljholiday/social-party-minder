@@ -1,8 +1,10 @@
 <?php
 /* Template Name: Party Minder Dashboard */
 get_header(); ?>
+
 <div class="spm-container">
     <h1>My Events</h1>
+
     <?php echo do_shortcode('[spm_nav]'); ?>
 
     <?php
@@ -29,5 +31,7 @@ get_header(); ?>
         echo '<p>You haven’t created any events yet.</p>';
     endif;
     ?>
+
 </div>
+
 <?php get_footer(); ?>
