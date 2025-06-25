@@ -4,6 +4,7 @@ get_header(); ?>
 
 <div class="spm-container">
     <h1><?php the_title(); ?></h1>
+    <p>Did the party minder template load?</p>
 
     <?php echo do_shortcode('[spm_nav]'); ?>
 
