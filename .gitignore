@@ -1,0 +1,14 @@
+# WordPress plugin dev
+/node_modules/
+/vendor/
+/*.zip
+*.log
+*.DS_Store
+*.bak
+*.tmp
+*.swp
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+

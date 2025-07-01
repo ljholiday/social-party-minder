@@ -1,0 +1,13 @@
+{
+  "apiVersion": 2,
+  "name": "spm/event-name",
+  "title": "Event Name",
+  "category": "social-party-minder",
+  "icon": "calendar-alt",
+  "description": "A heading block for naming the event.",
+  "keywords": ["event", "name", "title"],
+  "version": "0.1.0",
+  "textdomain": "social-party-minder",
+  "editorScript": "file:./index.js"
+}
+
